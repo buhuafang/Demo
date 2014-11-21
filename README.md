@@ -20,3 +20,16 @@ Padrino stores application mounting information by default within config/apps.rb
 Padrino.mount("blog").to("/blog")
 Padrino.mount("website").to("/website")
 Padrino.mount("app").to("/")
+
+Advanced Mounting Support
+
+In addition to the basic mounting capabilities afforded by Padrino for each application within a project, the Padrino::Router also allows for more advanced mounting conditions.
+
+The Padrino::Router is an enhanced version of Rack::UrlMap which extends the ability to mount applications to a specified path, or specify host and subdomains to match to an application. For example, you could put the following in your config/apps.rb file:
+
+# Adds support for matching an app to a host string or pattern
+Padrino.mount("Blog").to("/").host("blog.example.org")
+Padrino.mount("Admin").host("admin.example.org")
+Padrino.mount("WebSite").host(/.*\.?example.org/)
+Padrino.mount("Foo").to("/foo").host("bar.example.org")
+This will configure each application to match to the given host pattern simplifying routing considerably.
